@@ -82,7 +82,13 @@ namespace math_expressions.ExpressionSolver.MathSolvers
 
 
         private string GetCodeExecutableCode(string expression) =>
-            template.Replace(templatePlaceholder, expression);
+            template.Replace(templatePlaceholder,
+                expression
+                .Replace("+", "+(double)")
+                .Replace("-", "-(double)")
+                .Replace("*", "*(double)")
+                .Replace("/", "/(double)")
+                );
 
 
         private string GetTemplate()
