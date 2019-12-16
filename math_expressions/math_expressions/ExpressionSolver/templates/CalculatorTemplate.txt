@@ -1,0 +1,10 @@
+﻿namespace math_expressions.ExpressionSolver.MathSolvers
+{
+    public class CalculatorTemplate
+    {
+        public double GetResult()
+        {
+            return ###EXPRESSION###;
+        }
+    }
+}
