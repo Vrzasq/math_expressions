@@ -7,7 +7,7 @@ using Microsoft.CSharp;
 
 namespace math_expressions.ExpressionSolver.MathSolvers
 {
-    public class CSharpMathSolver : IMathExpressionSolver<string, double>
+    public class CSharpMathSolver : IMathExpressionSolver
     {
         private const string resourceName = "math_expressions.ExpressionSolver.templates.CalculatorTemplate.txt";
         private const string calculatorClass = "math_expressions.ExpressionSolver.MathSolvers.CalculatorTemplate";

@@ -11,7 +11,7 @@ namespace math_expressions.Test
         [TestMethod]
         public void TestAddition()
         {
-            IMathExpressionSolver<string, double> solver = new CSharpMathSolver();
+            IMathExpressionSolver solver = new CSharpMathSolver();
             string expression = "2+1";
 
             double result = solver.Solve(expression);
@@ -22,7 +22,7 @@ namespace math_expressions.Test
         [TestMethod]
         public void TestSubtraction()
         {
-            IMathExpressionSolver<string, double> solver = new CSharpMathSolver();
+            IMathExpressionSolver solver = new CSharpMathSolver();
             string expression = "10-1";
 
             double result = solver.Solve(expression);
@@ -33,7 +33,7 @@ namespace math_expressions.Test
         [TestMethod]
         public void TestMultiplication()
         {
-            IMathExpressionSolver<string, double> solver = new CSharpMathSolver();
+            IMathExpressionSolver solver = new CSharpMathSolver();
             string expression = "20*5";
 
             double result = solver.Solve(expression);
@@ -44,7 +44,7 @@ namespace math_expressions.Test
         [TestMethod]
         public void TestDivision()
         {
-            IMathExpressionSolver<string, double> solver = new CSharpMathSolver();
+            IMathExpressionSolver solver = new CSharpMathSolver();
             string expression = "25/2";
 
             double result = solver.Solve(expression);
@@ -55,7 +55,7 @@ namespace math_expressions.Test
         [TestMethod]
         public void TestComplexExpression()
         {
-            IMathExpressionSolver<string, double> solver = new CSharpMathSolver();
+            IMathExpressionSolver solver = new CSharpMathSolver();
             string expression = "2+1*3/2+12";
 
             double result = solver.Solve(expression);
@@ -67,7 +67,7 @@ namespace math_expressions.Test
         [TestMethod]
         public void TestException()
         {
-            IMathExpressionSolver<string, double> solver = new CSharpMathSolver();
+            IMathExpressionSolver solver = new CSharpMathSolver();
             string expression = "assadsad";
 
             Assert.ThrowsException<ArgumentException>(() =>

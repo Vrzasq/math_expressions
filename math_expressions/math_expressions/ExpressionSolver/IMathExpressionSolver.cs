@@ -3,10 +3,8 @@
     /// <summary>
     /// Generic interface for solving math expression
     /// </summary>
-    /// <typeparam name="TRequest">input expression Ex. string</typeparam>
-    /// <typeparam name="TResult">output result Ex. double</typeparam>
-    public interface IMathExpressionSolver<TRequest, TResult>
+    public interface IMathExpressionSolver
     {
-        TResult Solve(TRequest expression);
+        double Solve(string expression);
     }
 }

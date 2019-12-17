@@ -3,7 +3,7 @@ using System;
 
 namespace math_expressions.ExpressionSolver.MathSolvers
 {
-    public class ExpressionMathSolver : IMathExpressionSolver<string, double>
+    public class ExpressionMathSolver : IMathExpressionSolver
     {
         private readonly IExpressionProvider<Expression> expressionListProvider;
 
