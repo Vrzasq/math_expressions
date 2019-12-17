@@ -7,7 +7,7 @@ using math_expressions.ExpressionSolver.Factory;
 namespace math_expressions.Test
 {
     [TestClass]
-    public class CSharpMathSolverTest
+    public class ExpressionMathSolverTest
     {
         [TestMethod]
         public void TestAddition()
