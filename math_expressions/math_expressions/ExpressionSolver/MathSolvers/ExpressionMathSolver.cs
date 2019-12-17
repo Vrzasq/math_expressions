@@ -5,7 +5,7 @@ namespace math_expressions.ExpressionSolver.MathSolvers
 {
     public class ExpressionMathSolver : IMathExpressionSolver
     {
-        private readonly IExpressionProvider<Expression> expressionTreeProvider;
+        private readonly IExpressionProvider<MathExpression> expressionTreeProvider;
 
         public ExpressionMathSolver(ExpressionTreeProviderBase expressionTreeProvider)
         {
@@ -15,7 +15,7 @@ namespace math_expressions.ExpressionSolver.MathSolvers
 
         public double Solve(string expression)
         {
-            Expression expressionTree = expressionTreeProvider.GetExpressions(expression);
+            MathExpression expressionTree = expressionTreeProvider.GetExpressions(expression);
 
             //skip root and assign its value to extras
             double result = 0.0;
@@ -28,7 +28,7 @@ namespace math_expressions.ExpressionSolver.MathSolvers
         // Recursivlly go down the tree
         // IMPORTANT dont forget to return :)
         // otherway Your expression will unfold which will result with unpredicted behaviour
-        private double ResolveTree(double result, Expression expressionTree, double extras)
+        private double ResolveTree(double result, MathExpression expressionTree, double extras)
         {
             if (expressionTree == null)
                 return result + extras;

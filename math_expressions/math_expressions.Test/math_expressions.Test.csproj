@@ -49,6 +49,7 @@
     <Reference Include="System.Core" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DefaultExpressionTreeProviderTest.cs" />
     <Compile Include="ExpressionFactoryTest.cs" />
     <Compile Include="ExpressionMathSolverTest.cs" />
     <Compile Include="CSharpMathSolverTest.cs" />

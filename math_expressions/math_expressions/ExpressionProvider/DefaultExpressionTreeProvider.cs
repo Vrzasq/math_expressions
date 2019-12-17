@@ -15,7 +15,7 @@ namespace math_expressions.ExpressionProvider
             IValueProvider<double> valueProvider) : base(valueProvider) { }
 
 
-        public override Expression GetExpressions(string expression)
+        public override MathExpression GetExpressions(string expression)
         {
             char[] lettes = expression.ToCharArray();
             // in math expression there is always n+1 numbers
@@ -23,20 +23,20 @@ namespace math_expressions.ExpressionProvider
             var queue = CreateNumberQueue(expression);
 
             // Create tree root element
-            Expression root = new Expression
+            MathExpression root = new MathExpression
             {
                 Operation = Operation.None,
                 Value = queue.Dequeue()
             };
 
-            Expression currentExpression = root;
+            MathExpression currentExpression = root;
 
             for (int i = 0; i < lettes.Length; i++)
             {
                 if (operators.Contains(lettes[i]))
                 {
                     // create child expression
-                    currentExpression.Next = new Expression
+                    currentExpression.Next = new MathExpression
                     {
                         Operation = GetOperation(lettes[i]),
                         Value = queue.Dequeue()
