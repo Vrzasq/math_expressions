@@ -43,7 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ExpressionProvider\DefaultExpressionTreeProvider.cs" />
-    <Compile Include="ExpressionProvider\ExpressionListProvider.cs" />
+    <Compile Include="ExpressionProvider\ExpressionTreeProvider.cs" />
     <Compile Include="ExpressionSolver\IMathExpressionSolver.cs" />
     <EmbeddedResource Include="ExpressionSolver\templates\CalculatorTemplate.txt" />
     <Compile Include="ExpressionSolver\MathSolvers\CSharpMathSolver.cs" />

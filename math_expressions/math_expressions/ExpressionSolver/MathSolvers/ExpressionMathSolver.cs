@@ -17,15 +17,18 @@ namespace math_expressions.ExpressionSolver.MathSolvers
         {
             Expression expressionTree = expressionListProvider.GetExpressions(expression);
 
-            //skip root
+            //skip root and assign its value to extras
             double result = 0.0;
-            result = GetResult(result, expressionTree.Next, expressionTree.Value);            
+            result = ResolveTree(result, expressionTree.Next, expressionTree.Value);
 
             return result;
         }
 
 
-        private double GetResult(double result, Expression expressionTree, double extras)
+        // Recursivlly go down the tree
+        // IMPORTANT dont forget to return :)
+        // otherway Your expression will unfold which will result with unpredicted behaviour
+        private double ResolveTree(double result, Expression expressionTree, double extras)
         {
             if (expressionTree == null)
                 return result + extras;
@@ -34,7 +37,7 @@ namespace math_expressions.ExpressionSolver.MathSolvers
             if (HasPriority(expressionTree.Operation))
             {
                 extras = MakeOperation(extras, expressionTree.Value, expressionTree.Operation);
-                return GetResult(result, expressionTree.Next, extras);
+                return ResolveTree(result, expressionTree.Next, extras);
             }
 
             // if next operation has priority over current one
@@ -43,13 +46,13 @@ namespace math_expressions.ExpressionSolver.MathSolvers
                 && HasPriority(expressionTree.Next.Operation))
             {
                 extras = expressionTree.Value;
-                GetResult(result, expressionTree.Next, extras);
+                return ResolveTree(result, expressionTree.Next, extras);
             }
 
             result = MakeOperation(result, expressionTree.Value, expressionTree.Operation) + extras;
             extras = 0.0;
 
-            return GetResult(result, expressionTree.Next, extras);
+            return ResolveTree(result, expressionTree.Next, extras);
         }
 
 
