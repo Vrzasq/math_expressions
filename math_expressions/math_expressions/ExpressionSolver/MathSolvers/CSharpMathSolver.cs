@@ -19,14 +19,12 @@ namespace math_expressions.ExpressionSolver.MathSolvers
         public CSharpMathSolver()
         {
             template = GetTemplate();
-            Console.WriteLine(template);
         }
 
 
         public double Solve(string expression)
         {
             string executableCode = GetCodeExecutableCode(expression);
-            Console.WriteLine(executableCode);
 
             using (CodeDomProvider codeProvider = new CSharpCodeProvider())
             {
