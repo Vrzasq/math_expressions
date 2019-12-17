@@ -6,42 +6,50 @@ using System.Threading.Tasks;
 
 namespace math_expressions.ExpressionSolver.MathSolvers
 {
-    enum Operation
-    { a, b, c, d }
-
-    class Expression
-    {
-        public double LeftSideNumber { get; set; }
-        public double RightSideNumber { get; set; }
-        public Operation Operation { get; set; }
-        public int Priority { get; set; }
-    }
-
-
     public class ExpressionMathSolver : IMathExpressionSolver<string, double>
     {
-        private IList<Expression> expressions;
+        private readonly IExpressionListProvider<Expression> expressionListProvider;
+
+        public ExpressionMathSolver(ExpressionListProviderBase expressionListProvider)
+        {
+            this.expressionListProvider = expressionListProvider;
+        }
 
         public double Solve(string expression)
         {
-            double result = 0.0;
+            IEnumerable<Expression> expressions = expressionListProvider.GetExpressions(expression).OrderBy(x => x.Priority);
+
+            double result = 0;
 
             foreach (var exp in expressions)
             {
-                result += foo(exp);
+                result += MakeArythmeticOperation(exp);
             }
-            throw new NotImplementedException();
+
+            return result;
         }
 
 
-        private double foo(Expression expression)
+        private double MakeArythmeticOperation(Expression expression)
         {
             switch (expression.Operation)
             {
-                case Operation.a:
-                    return expression.LeftSideNumber + expression.RightSideNumber
+                case Operation.Addition:
+                    return expression.LeftSideNumber + expression.RightSideNumber;
+
+                case Operation.Subtraction:
+                    return expression.LeftSideNumber - expression.RightSideNumber;
+
+                case Operation.Multiplication:
+                    return expression.LeftSideNumber * expression.RightSideNumber;
+
+                case Operation.Division:
+                    if (expression.RightSideNumber == 0)
+                        throw new InvalidOperationException("Division by 0 is impossible");
+                    return expression.LeftSideNumber / expression.RightSideNumber;
+
                 default:
-                    break;
+                    throw new InvalidOperationException($"Operation: {expression.Operation} is invalid");
             }
         }
     }
