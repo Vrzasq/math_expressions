@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using math_expressions.ExpressionSolver.MathSolvers;
 using math_expressions.ExpressionSolver;
 using math_expressions.ExpressionSolver.Factory;

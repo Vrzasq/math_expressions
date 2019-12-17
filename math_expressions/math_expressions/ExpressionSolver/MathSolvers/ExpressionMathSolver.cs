@@ -1,5 +1,5 @@
-﻿using math_expressions.ExpressionProvider;
-using System;
+﻿using System;
+using math_expressions.ExpressionProvider;
 
 namespace math_expressions.ExpressionSolver.MathSolvers
 {

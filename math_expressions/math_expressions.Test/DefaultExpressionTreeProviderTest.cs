@@ -1,6 +1,4 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using math_expressions.ExpressionSolver.MathSolvers;
-using math_expressions.ExpressionSolver.Factory;
 using math_expressions.ExpressionProvider;
 using math_expressions.ExpressionProvider.ValueProvider.Providers;
 

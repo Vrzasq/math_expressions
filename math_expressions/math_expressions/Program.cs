@@ -1,9 +1,6 @@
 using System;
-using math_expressions.ExpressionProvider;
-using math_expressions.ExpressionProvider.ValueProvider.Providers;
 using math_expressions.ExpressionSolver;
 using math_expressions.ExpressionSolver.Factory;
-using math_expressions.ExpressionSolver.MathSolvers;
 
 namespace math_expressions
 {
