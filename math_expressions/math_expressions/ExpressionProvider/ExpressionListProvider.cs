@@ -1,11 +1,10 @@
 ﻿using math_expressions.ExpressionProvider.ValueProvider;
-using System.Collections.Generic;
 
 namespace math_expressions.ExpressionProvider
 {
-    public interface IExpressionListProvider<T> where T : class
+    public interface IExpressionProvider<T> where T : class
     {
-        IEnumerable<T> GetExpressions(string expression);
+        T GetExpressions(string expression);
     }
 
     public enum Operation
@@ -13,21 +12,20 @@ namespace math_expressions.ExpressionProvider
 
     public class Expression
     {
-        public double LeftSideNumber { get; set; }
-        public double RightSideNumber { get; set; }
+        public double Value { get; set; }
         public Operation Operation { get; set; }
-        public int Priority { get; set; }
+        public Expression Next { get; set; }
     }
 
-    public abstract class ExpressionListProviderBase : IExpressionListProvider<Expression>
+    public abstract class ExpressionTreeProviderBase : IExpressionProvider<Expression>
     {
         protected readonly IValueProvider<double> valueProvider;
 
-        public ExpressionListProviderBase(IValueProvider<double> valueProvider)
+        public ExpressionTreeProviderBase(IValueProvider<double> valueProvider)
         {
             this.valueProvider = valueProvider;
         }
 
-        public abstract IEnumerable<Expression> GetExpressions(string expression);
+        public abstract Expression GetExpressions(string expression);
     }
 }

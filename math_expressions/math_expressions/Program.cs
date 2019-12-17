@@ -1,8 +1,6 @@
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using math_expressions.ExpressionProvider;
+using math_expressions.ExpressionProvider.ValueProvider.Providers;
 using math_expressions.ExpressionSolver;
 using math_expressions.ExpressionSolver.MathSolvers;
 
@@ -17,8 +15,11 @@ namespace math_expressions
             string expression = Console.ReadLine();
 
             IMathExpressionSolver<string, double> solver = new CSharpMathSolver();
+            IMathExpressionSolver<string, double> solver2 = new ExpressionMathSolver(new DefaultExpressionListProvider(new DoubleValueProvider()));
             double result = solver.Solve(expression);
+            double result2 = solver2.Solve(expression);
             Console.WriteLine(result);
+            Console.WriteLine(result2);
 
         }
     }

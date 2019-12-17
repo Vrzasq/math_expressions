@@ -1,54 +1,55 @@
 ﻿using math_expressions.ExpressionProvider;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace math_expressions.ExpressionSolver.MathSolvers
 {
     public class ExpressionMathSolver : IMathExpressionSolver<string, double>
     {
-        private readonly IExpressionListProvider<Expression> expressionListProvider;
+        private readonly IExpressionProvider<Expression> expressionListProvider;
 
-        public ExpressionMathSolver(ExpressionListProviderBase expressionListProvider)
+        public ExpressionMathSolver(ExpressionTreeProviderBase expressionListProvider)
         {
             this.expressionListProvider = expressionListProvider;
         }
 
         public double Solve(string expression)
         {
-            IEnumerable<Expression> expressions = expressionListProvider.GetExpressions(expression).OrderBy(x => x.Priority);
+            Expression expressionTree = expressionListProvider.GetExpressions(expression);
+            
 
-            double result = 0;
+            double result = expressionTree.Value;
 
-            foreach (var exp in expressions)
+            while (expressionTree.Next != null)
             {
-                result += MakeArythmeticOperation(exp);
+                result = MakeOperation(result, expressionTree.Next.Value, expressionTree.Next.Operation);
+                expressionTree = expressionTree.Next;
             }
+
 
             return result;
         }
 
-
-        private double MakeArythmeticOperation(Expression expression)
+        private double MakeOperation(double currentValue, double nextOperationValue, Operation operation)
         {
-            switch (expression.Operation)
+            switch (operation)
             {
                 case Operation.Addition:
-                    return expression.LeftSideNumber + expression.RightSideNumber;
+                    return currentValue + nextOperationValue;
 
                 case Operation.Subtraction:
-                    return expression.LeftSideNumber - expression.RightSideNumber;
+                    return currentValue - nextOperationValue;
 
                 case Operation.Multiplication:
-                    return expression.LeftSideNumber * expression.RightSideNumber;
+                    return currentValue * nextOperationValue;
 
                 case Operation.Division:
-                    if (expression.RightSideNumber == 0)
-                        throw new InvalidOperationException("Division by 0 is impossible");
-                    return expression.LeftSideNumber / expression.RightSideNumber;
+                    if (nextOperationValue == 0)
+                        throw new InvalidOperationException("Can't divide by 0");
+
+                    return currentValue / nextOperationValue;
 
                 default:
-                    throw new InvalidOperationException($"Operation: {expression.Operation} is invalid");
+                    throw new InvalidOperationException($"Could not perform {operation}");
             }
         }
     }
