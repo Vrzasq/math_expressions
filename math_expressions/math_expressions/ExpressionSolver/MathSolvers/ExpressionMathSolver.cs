@@ -5,17 +5,17 @@ namespace math_expressions.ExpressionSolver.MathSolvers
 {
     public class ExpressionMathSolver : IMathExpressionSolver
     {
-        private readonly IExpressionProvider<Expression> expressionListProvider;
+        private readonly IExpressionProvider<Expression> expressionTreeProvider;
 
-        public ExpressionMathSolver(ExpressionTreeProviderBase expressionListProvider)
+        public ExpressionMathSolver(ExpressionTreeProviderBase expressionTreeProvider)
         {
-            this.expressionListProvider = expressionListProvider;
+            this.expressionTreeProvider = expressionTreeProvider;
         }
 
 
         public double Solve(string expression)
         {
-            Expression expressionTree = expressionListProvider.GetExpressions(expression);
+            Expression expressionTree = expressionTreeProvider.GetExpressions(expression);
 
             //skip root and assign its value to extras
             double result = 0.0;
@@ -32,7 +32,6 @@ namespace math_expressions.ExpressionSolver.MathSolvers
         {
             if (expressionTree == null)
                 return result + extras;
-
 
             if (HasPriority(expressionTree.Operation))
             {

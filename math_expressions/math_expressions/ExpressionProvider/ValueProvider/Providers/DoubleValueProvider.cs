@@ -1,4 +1,6 @@
-﻿namespace math_expressions.ExpressionProvider.ValueProvider.Providers
+﻿using System;
+
+namespace math_expressions.ExpressionProvider.ValueProvider.Providers
 {
     public class DoubleValueProvider : IValueProvider<double>
     {
@@ -7,7 +9,7 @@
             if (double.TryParse(value.Replace('.', ','), out double result))
                 return result;
 
-            return 0;
+            throw new ArgumentException($"Failed to parse value: [{value}]");
         }
     }
 }

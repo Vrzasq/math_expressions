@@ -46,7 +46,7 @@ namespace math_expressions.ExpressionSolver.MathSolvers
                 if (result != null)
                     return (double)result;
                 else
-                    throw new ArgumentException($"Failed to resolve exporession {expression}");
+                    throw new ArgumentException($"Failed to resolve expression {expression}");
             }
         }
 
