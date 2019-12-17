@@ -15,9 +15,9 @@ namespace math_expressions
             string expression = Console.ReadLine();
 
             IMathExpressionSolver<string, double> solver = new CSharpMathSolver();
-            IMathExpressionSolver<string, double> solver2 = new ExpressionMathSolver(new DefaultExpressionListProvider(new DoubleValueProvider()));
-            double result = solver.Solve(expression);
-            double result2 = solver2.Solve(expression);
+            IMathExpressionSolver<string, double> solver2 = new ExpressionMathSolver(new DefaultExpressionTreeProvider(new DoubleValueProvider()));
+            double result = solver.Solve("1+1+3*1*4/5/5/3*34/23*324-100");
+            double result2 = solver2.Solve("1+1+3*1*4/5/5/3*34/23*324-100");
             Console.WriteLine(result);
             Console.WriteLine(result2);
 

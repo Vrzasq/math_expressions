@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace math_expressions.ExpressionProvider
 {
-    public class DefaultExpressionListProvider : ExpressionTreeProviderBase
+    public class DefaultExpressionTreeProvider : ExpressionTreeProviderBase
     {
-        public DefaultExpressionListProvider(IValueProvider<double> valueProvider): base(valueProvider) { }
+        public DefaultExpressionTreeProvider(IValueProvider<double> valueProvider): base(valueProvider) { }
 
         Expression mockData = new Expression
         {
             Value = 1,
-            Operation = Operation.Multiplication,
+            Operation = Operation.None,
             Next = new Expression
             {
                 Value = 53,

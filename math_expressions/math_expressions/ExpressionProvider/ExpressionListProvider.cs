@@ -8,7 +8,7 @@ namespace math_expressions.ExpressionProvider
     }
 
     public enum Operation
-    { Addition, Subtraction, Multiplication, Division }
+    { None, Addition, Subtraction, Multiplication, Division }
 
     public class Expression
     {

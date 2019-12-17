@@ -12,22 +12,50 @@ namespace math_expressions.ExpressionSolver.MathSolvers
             this.expressionListProvider = expressionListProvider;
         }
 
+
         public double Solve(string expression)
         {
             Expression expressionTree = expressionListProvider.GetExpressions(expression);
-            
 
-            double result = expressionTree.Value;
-
-            while (expressionTree.Next != null)
-            {
-                result = MakeOperation(result, expressionTree.Next.Value, expressionTree.Next.Operation);
-                expressionTree = expressionTree.Next;
-            }
-
+            //skip root
+            double result = 0.0;
+            result = GetResult(result, expressionTree.Next, expressionTree.Value);            
 
             return result;
         }
+
+
+        private double GetResult(double result, Expression expressionTree, double extras)
+        {
+            if (expressionTree == null)
+                return result + extras;
+
+
+            if (HasPriority(expressionTree.Operation))
+            {
+                extras = MakeOperation(extras, expressionTree.Value, expressionTree.Operation);
+                return GetResult(result, expressionTree.Next, extras);
+            }
+
+            // if next operation has priority over current one
+            // assing current value to extras and move to next expression
+            if (expressionTree.Next != null
+                && HasPriority(expressionTree.Next.Operation))
+            {
+                extras = expressionTree.Value;
+                GetResult(result, expressionTree.Next, extras);
+            }
+
+            result = MakeOperation(result, expressionTree.Value, expressionTree.Operation) + extras;
+            extras = 0.0;
+
+            return GetResult(result, expressionTree.Next, extras);
+        }
+
+
+        private bool HasPriority(Operation operation) =>
+            operation == Operation.Multiplication || operation == Operation.Division;
+
 
         private double MakeOperation(double currentValue, double nextOperationValue, Operation operation)
         {
