@@ -42,13 +42,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ExpressionSolver\ExpressionListProvider.cs" />
+    <Compile Include="ExpressionProvider\ExpressionListProvider.cs" />
     <Compile Include="ExpressionSolver\IMathExpressionSolver.cs" />
     <EmbeddedResource Include="ExpressionSolver\templates\CalculatorTemplate.txt" />
     <Compile Include="ExpressionSolver\MathSolvers\CSharpMathSolver.cs" />
     <Compile Include="ExpressionSolver\MathSolvers\ExpressionMathSolver.cs" />
-    <Compile Include="ExpressionSolver\ValueProvider\IValueProvider.cs" />
-    <Compile Include="ExpressionSolver\ValueProvider\Providers\DoubleValueProvider.cs" />
+    <Compile Include="ExpressionProvider\ValueProvider\IValueProvider.cs" />
+    <Compile Include="ExpressionProvider\ValueProvider\Providers\DoubleValueProvider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

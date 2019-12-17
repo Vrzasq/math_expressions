@@ -1,4 +1,4 @@
-﻿namespace math_expressions.ExpressionSolver.ValueProvider.Providers
+﻿namespace math_expressions.ExpressionProvider.ValueProvider.Providers
 {
     public class DoubleValueProvider : IValueProvider<double>
     {

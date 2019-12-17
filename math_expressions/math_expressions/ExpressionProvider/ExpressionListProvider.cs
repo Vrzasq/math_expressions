@@ -1,7 +1,7 @@
-﻿using math_expressions.ExpressionSolver.ValueProvider;
+﻿using math_expressions.ExpressionProvider.ValueProvider;
 using System.Collections.Generic;
 
-namespace math_expressions.ExpressionSolver
+namespace math_expressions.ExpressionProvider
 {
     public interface IExpressionListProvider<T> where T : class
     {
