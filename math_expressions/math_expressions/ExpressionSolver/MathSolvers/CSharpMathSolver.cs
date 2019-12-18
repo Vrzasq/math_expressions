@@ -26,12 +26,31 @@ namespace math_expressions.ExpressionSolver.MathSolvers
         public double Solve(string expression)
         {
             string sanitizedInput = Sanitize(expression);
-
-            if (sanitizedInput.Contains(divisionByZero))
-                throw new InvalidOperationException("Can't divide by 0");
+            CheckInputCorrection(sanitizedInput);
 
             string executableCode = GetCodeExecutableCode(expression);
+            var compiledAssembly = CompileCode(executableCode);
+            object calculatorInstance = compiledAssembly.CreateInstance(calculatorClass);
 
+            var calculatorMethod = GetResultMethod(compiledAssembly);
+            var result = calculatorMethod.Invoke(calculatorInstance, new object[] { });
+
+            if (result != null)
+                return (double)result;
+            else
+                throw new ArgumentException($"Failed to resolve expression {expression}");
+        }
+
+
+        private void CheckInputCorrection(string input)
+        {
+            if (input.Contains(divisionByZero))
+                throw new InvalidOperationException("Can't divide by 0");
+        }
+
+
+        private Assembly CompileCode(string executableCode)
+        {
             using (CodeDomProvider codeProvider = new CSharpCodeProvider())
             {
                 var compilerResult = codeProvider.CompileAssemblyFromSource(CompilerParams, executableCode);
@@ -42,15 +61,7 @@ namespace math_expressions.ExpressionSolver.MathSolvers
                     throw exception;
                 }
 
-                object calculatorInstance = compilerResult.CompiledAssembly.CreateInstance(calculatorClass);
-
-                var calculatorMethod = GetResultMethod(compilerResult.CompiledAssembly);
-                var result = calculatorMethod.Invoke(calculatorInstance, new object[] { });
-
-                if (result != null)
-                    return (double)result;
-                else
-                    throw new ArgumentException($"Failed to resolve expression {expression}");
+                return compilerResult.CompiledAssembly;
             }
         }
 
