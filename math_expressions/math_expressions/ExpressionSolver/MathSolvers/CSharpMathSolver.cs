@@ -13,6 +13,7 @@ namespace math_expressions.ExpressionSolver.MathSolvers
         private const string calculatorClass = "math_expressions.ExpressionSolver.MathSolvers.CalculatorTemplate";
         private const string templatePlaceholder = "###EXPRESSION###";
         private const string resultMethod = "GetResult";
+        private const string divisionByZero = "/0";
 
         private readonly string template;
 
@@ -24,6 +25,11 @@ namespace math_expressions.ExpressionSolver.MathSolvers
 
         public double Solve(string expression)
         {
+            string sanitizedInput = Sanitize(expression);
+
+            if (sanitizedInput.Contains(divisionByZero))
+                throw new InvalidOperationException("Can't divide by 0");
+
             string executableCode = GetCodeExecutableCode(expression);
 
             using (CodeDomProvider codeProvider = new CSharpCodeProvider())
@@ -98,6 +104,10 @@ namespace math_expressions.ExpressionSolver.MathSolvers
                 return result;
             }
         }
+
+
+        private string Sanitize(string expression) =>
+            expression.Replace(" ", string.Empty);
 
     }
 }

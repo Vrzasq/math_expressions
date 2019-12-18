@@ -8,17 +8,46 @@ namespace math_expressions
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello User :)");
-            Console.WriteLine("Please paste math expresion:");
-            string expression = Console.ReadLine();
+            UI ui = UI.Instance;
 
-            IMathExpressionSolver solver = ExpressionSolverFactory.GetSolver(Solver.CSharpMathSolver);
-            IMathExpressionSolver solver2 = ExpressionSolverFactory.GetSolver(Solver.ExpressionMathSolver);
-            double result = solver.Solve("1+1+3*1*4/5/5/3*34/23*324-100");
-            double result2 = solver2.Solve("1+1+3*1*4/5/5/3*34/23*324-100");
-            Console.WriteLine(result);
-            Console.WriteLine(result2);
+            ui.DisplayLogo(false);
+            ui.GreetUser();
+            ui.IntroduceEngines();
 
+            ConsoleKeyInfo keyInfo;
+
+            do
+            {
+                int option = ui.ChooseEngine();
+                IMathExpressionSolver solver = GetEngine(option);
+
+                string expression = ui.GetUserMathExpression();
+
+                try
+                {
+                    double result = solver.Solve(expression);
+                    ui.PresentResult(result);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+                ui.EndMessage();
+                keyInfo = Console.ReadKey();
+            } while (keyInfo.Key != ConsoleKey.Escape);
+        }
+
+        private static IMathExpressionSolver GetEngine(int option)
+        {
+            switch (option)
+            {
+                case 2:
+                    return ExpressionSolverFactory.GetSolver(Solver.CSharpMathSolver);
+
+                default:
+                    return ExpressionSolverFactory.GetSolver(Solver.ExpressionMathSolver);
+            }
         }
     }
 }

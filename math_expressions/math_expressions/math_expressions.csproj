@@ -46,6 +46,7 @@
     <Compile Include="ExpressionProvider\ExpressionTreeProvider.cs" />
     <Compile Include="ExpressionSolver\Factory\ExpressionSolverFactory.cs" />
     <Compile Include="ExpressionSolver\IMathExpressionSolver.cs" />
+    <Compile Include="UI.cs" />
     <EmbeddedResource Include="ExpressionSolver\templates\CalculatorTemplate.txt" />
     <Compile Include="ExpressionSolver\MathSolvers\CSharpMathSolver.cs" />
     <Compile Include="ExpressionSolver\MathSolvers\ExpressionMathSolver.cs" />
@@ -61,5 +62,10 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup />
+  <ItemGroup>
+    <Content Include="assets\logo.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
