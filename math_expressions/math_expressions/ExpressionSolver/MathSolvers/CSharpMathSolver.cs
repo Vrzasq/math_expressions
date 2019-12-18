@@ -28,8 +28,7 @@ namespace math_expressions.ExpressionSolver.MathSolvers
             string sanitizedInput = Sanitize(expression);
             CheckInputCorrection(sanitizedInput);
 
-            string executableCode = GetCodeExecutableCode(expression);
-            var compiledAssembly = CompileCode(executableCode);
+            var compiledAssembly = Compile(expression);
             object calculatorInstance = compiledAssembly.CreateInstance(calculatorClass);
 
             var calculatorMethod = GetResultMethod(compiledAssembly);
@@ -49,8 +48,10 @@ namespace math_expressions.ExpressionSolver.MathSolvers
         }
 
 
-        private Assembly CompileCode(string executableCode)
+        private Assembly Compile(string expression)
         {
+            string executableCode = GetCodeExecutableCode(expression);
+
             using (CodeDomProvider codeProvider = new CSharpCodeProvider())
             {
                 var compilerResult = codeProvider.CompileAssemblyFromSource(CompilerParams, executableCode);
